@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ECECEE">
+  <title>Baju Custom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23262626'/%3E%3Cpath d='M8.6 5.5 5.4 7.4 4.3 10.5l2.1.9v7.1h11.2v-7.1l2.1-.9-1.1-3.1-3.2-1.9c-.5 1.1-1.5 1.8-2.8 1.8S9.1 6.6 8.6 5.5Z' fill='none' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    window.__ERR__ = [];
+    window.addEventListener('error', function (e) {
+      var m = (e.message || 'Error') + (e.lineno ? ' (baris ' + e.lineno + ')' : '');
+      if (e.filename) m += ' \u2014 ' + String(e.filename).split('/').pop();
+      window.__ERR__.push(m);
+    });
+    try { var t = localStorage.getItem('bc_theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="javascript:void(0)" onclick="document.querySelector('.view.active')?.focus()">Lewati ke konten</a>
+  <div id="topProgress" class="top-progress" aria-hidden="true"></div>
+
+  <!-- =================== SHELL PUBLIK =================== -->
+  <div id="shellPublik" class="shell-pub">
+    <header class="pub-nav">
+      <div class="pub-nav-in">
+        <a href="javascript:void(0)" class="brand" data-go="katalog" aria-label="Beranda katalog">
+          <span class="brand-mark"><svg class="ic-baju" viewBox="0 0 24 24" width="1.15em" height="1.15em" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M8 3 3.5 5.6 2 10l3 1.3V21h14v-9.7L22 10l-1.5-4.4L16 3c-.6 1.6-2.1 2.6-4 2.6S8.6 4.6 8 3Z"/></svg></span>
+          <span class="brand-txt"><b data-bind="namaToko">Baju Custom</b><small data-bind="tagline">Pre-order baju custom</small></span>
+        </a>
+        <nav class="pub-links" aria-label="Menu utama">
+          <a href="javascript:void(0)" data-go="katalog" class="pub-link">Katalog Desain</a>
+          <a href="javascript:void(0)" data-go="status" class="pub-link">Cek Status Pesanan</a>
+        </nav>
+        <div class="pub-actions">
+          <button class="btn btn-primary btn-sm hide-sm" data-go="pesan"><i class="bi bi-bag-plus"></i> Pesan Sekarang</button>
+          <button class="icon-btn" data-action="theme" aria-label="Ganti tema terang/gelap"><i class="bi bi-moon-stars"></i></button>
+          <button class="icon-btn dark" data-go="login" aria-label="Masuk admin"><i class="bi bi-person"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="pub-main">
+      <section id="v-katalog" class="view" tabindex="-1" aria-label="Katalog desain"></section>
+      <section id="v-pesan" class="view" tabindex="-1" aria-label="Form pre-order"></section>
+      <section id="v-sukses" class="view" tabindex="-1" aria-label="Pesanan terkirim"></section>
+      <section id="v-status" class="view" tabindex="-1" aria-label="Cek status pesanan"></section>
+      <section id="v-login" class="view" tabindex="-1" aria-label="Masuk admin"></section>
+    </main>
+
+    <footer class="pub-foot" id="pubFoot"></footer>
+
+    <nav class="bottom-nav pub-bottom" aria-label="Navigasi bawah">
+      <button data-go="katalog" class="bn-item"><i class="bi bi-grid"></i><span>Katalog</span></button>
+      <button data-go="pesan" class="bn-item bn-main"><i class="bi bi-plus-circle"></i><span>Pesan</span></button>
+      <button data-go="status" class="bn-item"><i class="bi bi-search"></i><span>Status</span></button>
+    </nav>
+  </div>
+
+  <!-- =================== SHELL ADMIN =================== -->
+  <div id="shellAdmin" class="shell-adm" hidden>
+    <aside class="rail" aria-label="Menu admin">
+      <div class="rail-main">
+        <button class="rail-logo" data-go="beranda" aria-label="Beranda"><svg class="ic-baju" viewBox="0 0 24 24" width="1.15em" height="1.15em" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M8 3 3.5 5.6 2 10l3 1.3V21h14v-9.7L22 10l-1.5-4.4L16 3c-.6 1.6-2.1 2.6-4 2.6S8.6 4.6 8 3Z"/></svg></button>
+        <div class="rail-items" id="railItems"></div>
+      </div>
+      <div class="rail-foot">
+        <button class="rail-btn" data-action="theme" data-tip="Tema terang/gelap" aria-label="Ganti tema"><i class="bi bi-moon-stars"></i></button>
+        <button class="rail-btn" data-action="logout" data-tip="Keluar" aria-label="Keluar"><i class="bi bi-box-arrow-right"></i></button>
+      </div>
+    </aside>
+
+    <div class="adm-wrap">
+      <header class="adm-top">
+        <div class="adm-title">
+          <small data-bind="namaToko">Baju Custom</small>
+          <h1 id="admTitle">Beranda</h1>
+        </div>
+        <div class="adm-tools">
+          <label class="search-pill hide-sm" aria-label="Cari pesanan">
+            <i class="bi bi-search"></i>
+            <input id="globalSearch" type="search" placeholder="Cari kode, nama, No HP&#x2026;" autocomplete="off">
+          </label>
+          <button class="icon-btn" id="bellBtn" data-action="notif" aria-label="Notifikasi"><i class="bi bi-bell"></i><span class="dot-badge" id="bellBadge" hidden></span></button>
+          <button class="avatar-btn" data-action="akun" aria-label="Akun saya"><span id="meAvatar">A</span></button>
+        </div>
+      </header>
+
+      <main class="adm-main">
+        <section id="v-beranda" class="view" tabindex="-1"></section>
+        <section id="v-pesanan" class="view" tabindex="-1"></section>
+        <section id="v-detail" class="view" tabindex="-1"></section>
+        <section id="v-verifikasi" class="view" tabindex="-1"></section>
+        <section id="v-input" class="view" tabindex="-1"></section>
+        <section id="v-marketplace" class="view" tabindex="-1"></section>
+        <section id="v-pelanggan" class="view" tabindex="-1"></section>
+        <section id="v-desain" class="view" tabindex="-1"></section>
+        <section id="v-pengaturan" class="view" tabindex="-1"></section>
+      </main>
+    </div>
+
+    <nav class="bottom-nav adm-bottom" id="admBottom" aria-label="Navigasi admin"></nav>
+  </div>
+
+  <!-- =================== OVERLAY =================== -->
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden></aside>
+  <div id="modal" class="modal" role="dialog" aria-modal="true" hidden><div class="modal-card" id="modalCard"></div></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="printArea" class="print-area"></div>
+
+  <!-- Pesan diagnosis: tampil hanya jika JavaScript.html gagal berjalan -->
+  <div id="bootFail" hidden style="position:fixed;inset:auto 16px 16px 16px;z-index:99;max-width:640px;margin:0 auto;background:#8E2F2F;color:#fff;padding:18px 20px;border-radius:20px;font:14px/1.5 system-ui,sans-serif;box-shadow:0 12px 32px rgba(0,0,0,.3)"></div>
+  <script>
+    setTimeout(function () {
+      if (window.__APP_OK__) return;
+      var el = document.getElementById('bootFail');
+      var err = (window.__ERR__ || []).slice(0, 3).join('<br>') || 'File js/app.js tidak termuat. Pastikan folder js/ ikut ter-upload ke GitHub.';
+      el.innerHTML = '<b style="font-size:16px">Aplikasi belum bisa berjalan</b><div style="margin-top:6px;opacity:.9">' + err.replace(/</g, '&lt;').replace(/&lt;br>/g, '<br>') + '</div>' +
+        '<div style="margin-top:10px">Periksa di repository GitHub: <code>index.html</code> ada di paling atas, dan folder <code>css/</code> serta <code>js/</code> ikut ter-upload. Lalu tekan Ctrl+Shift+R.</div>';
+      el.hidden = false;
+    }, 4000);
+  </script>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
